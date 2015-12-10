@@ -20,7 +20,8 @@ class UsersController < ApplicationController
 																	 title: @clearbit_response[:person][:employment][:title] || "n/a",
 																	 company: @clearbit_response[:person][:employment][:name] || "n/a",
 																	 photo_url: @clearbit_response[:person][:avatar] || "n/a",
-																	 source: "clearbit")
+																	 source: "Clearbit",
+																	 tags: "n/a")
 		end
 
 		@fc_profile = @user.profiles.find_by(source:"fullcontact")
@@ -31,7 +32,7 @@ class UsersController < ApplicationController
 			
 			@fullcontact_response[:organizations]
 			@fc_profile = @user.profiles.create(name: @fullcontact_response[:contact_info][:full_name] || "n/a",
-																	 				source: "fullcontact")
+																	 				source: "Fullcontact")
 
 			#Add employment info if it exists
 			if @fullcontact_response[:organizations]
@@ -65,6 +66,6 @@ class UsersController < ApplicationController
 				end
 			end
 			@fc_profile.save	
-		end
+		end	
 	end
 end
