@@ -1,9 +1,15 @@
 <tr>
 	<td class="col-md-1"><%= profile.source%></td>
-	<td class="col-md-1"><%= profile.name %></td>
-	<td class="col-md-2"><img style="height: 100px" src=<%= profile.photo_url%>></td>
+	<td class="col-md-1"><%= profile.name || "n/a" %></td>
+	<td class="col-md-2">
+		<% if profile.photo_url %>
+			<img style="height: 100px" src=<%= profile.photo_url%>>
+		<% else %>
+			n/a
+		<% end %>
+	</td>
 
-	<td class="col-md-2"><%= profile.company%></td>
-	<td class="cold-md-2"><%= profile.title%></td>
+	<td class="col-md-2"><%= profile.company || "n/a" %></td>
+	<td class="cold-md-2"><%= profile.title || "n/a" %></td>
 	<td class="col-md-4"><%= profile.tags || "n/a" %></td>
 </tr>
