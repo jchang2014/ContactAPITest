@@ -11,61 +11,75 @@ class UsersController < ApplicationController
 			@user = User.create(email: params[:q])
 		end
 
-		@cb_profile = @user.profiles.find_by(source:"clearbit")
+		@cb_profile = @user.profiles.find_by(source:"Clearbit")
 
-		if @cb_profile == nil
-			#Create clearbit profile
-			@clearbit_response = Clearbit::Enrichment.find(email: params[:q], stream: true)
-			@cb_profile = @user.profiles.create(name: @clearbit_response[:person][:name][:fullName] || "n/a",
-																	 title: @clearbit_response[:person][:employment][:title] || "n/a",
-																	 company: @clearbit_response[:person][:employment][:name] || "n/a",
-																	 photo_url: @clearbit_response[:person][:avatar] || "n/a",
-																	 source: "Clearbit",
-																	 tags: "n/a")
+		if !@cb_profile
+			create_cb_profile
 		end
 
-		@fc_profile = @user.profiles.find_by(source:"fullcontact")
+		@fc_profile = @user.profiles.find_by(source:"Fullcontact")
 
-		if @fc_profile == nil
-			#Create fullcontact profile
-			@fullcontact_response = FullContact.person(email: params[:q])
+		if !@fc_profile
+			create_fc_profile
+			find_fc_employment_info
+			find_fc_photo_info
+			find_fc_tag_info
 			
-			@fullcontact_response[:organizations]
-			@fc_profile = @user.profiles.create(name: @fullcontact_response[:contact_info][:full_name] || "n/a",
-																	 				source: "Fullcontact")
+			@fc_profile.save	
+		end	
+	end
 
-			#Add employment info if it exists
-			if @fullcontact_response[:organizations]
-			  @fc_profile.title = @fullcontact_response[:organizations][0][:title]
-			  @fc_profile.company = @fullcontact_response[:organizations][0][:name]
-			else
-				@fc_profile.title = "n/a"
-				@fc_profile.company = "n/a"
-			end
+	private
 
-			#Add photo_url if photos exist
-			if @fullcontact_response[:photos]
-			  @fc_profile.photo_url = @fullcontact_response[:photos][0][:url]
-			else
-				@fc_profile.photo_url = "n/a"
-			end
+	def create_cb_profile
+		@clearbit_response = Clearbit::Enrichment.find(email: params[:q], stream: true)
+		@cb_profile = @user.profiles.create(name: @clearbit_response[:person][:name][:fullName] || "n/a",
+																 title: @clearbit_response[:person][:employment][:title] || "n/a",
+																 company: @clearbit_response[:person][:employment][:name] || "n/a",
+																 photo_url: @clearbit_response[:person][:avatar] || "n/a",
+																 source: "Clearbit",
+																 tags: "n/a")
+	end
 
-			#Create tags for fc profile if they exist
-			if @fullcontact_response[:digital_footprint]
-				@topics = @fullcontact_response[:digital_footprint][:topics]
-				if @topics
-					if !@topics.empty?
-						@tags = []
-						@topics.each {|topic| @tags << topic[:value] } 
-						@fc_profile.tags = @tags.join(', ')
-					else
-						@fc_profile.tags = "n/a"
-					end
+	def create_fc_profile
+		@fullcontact_response = FullContact.person(email: params[:q])
+			
+		@fc_profile = @user.profiles.create(name: @fullcontact_response.try(:contact_info).try(:full_name) || "n/a",
+																 				source: "Fullcontact")
+	end
+
+	def find_fc_employment_info
+		if @fullcontact_response[:organizations]
+		  @fc_profile.title = @fullcontact_response[:organizations][0][:title]
+		  @fc_profile.company = @fullcontact_response[:organizations][0][:name]
+		else
+			@fc_profile.title = "n/a"
+			@fc_profile.company = "n/a"
+		end
+	end
+
+	def find_fc_photo_info
+		if @fullcontact_response[:photos]
+		  @fc_profile.photo_url = @fullcontact_response[:photos][0][:url]
+		else
+			@fc_profile.photo_url = "n/a"
+		end
+	end
+
+	def find_fc_tag_info
+		if @fullcontact_response[:digital_footprint]
+			@topics = @fullcontact_response[:digital_footprint][:topics]
+			if @topics
+				if !@topics.empty?
+					@tags = []
+					@topics.each {|topic| @tags << topic[:value] } 
+					@fc_profile.tags = @tags.join(', ')
 				else
 					@fc_profile.tags = "n/a"
 				end
+			else
+				@fc_profile.tags = "n/a"
 			end
-			@fc_profile.save	
-		end	
+		end
 	end
 end
