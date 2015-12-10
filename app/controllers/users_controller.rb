@@ -33,9 +33,9 @@ class UsersController < ApplicationController
 																	 company: @fullcontact_response[:organizations][0][:name] || "n/a",
 																	 photo_url: @fullcontact_response[:photos][0][:url] || "n/a",
 																	 source: "fullcontact")
-			
+
 			#Create tags for fc profile
-			@tags = []
+			@tags = [] #FIX THIS
 			@fullcontact_response[:digital_footprint][:topics].each {|item| @tags << item[:value] } if !@fullcontact_response[:digital_footprint][:topics].empty?
 			@fc_profile.tags = @tags.join(', ')
 		end
