@@ -1,0 +1,13 @@
+<h1>Test App for Contact APIs</h1>
+
+<div class="searchbar">
+	<%= form_tag("/home/search", method: "get") do %>
+	  <%= label_tag(:q, "Search for:") %>
+	  <%= text_field_tag(:q) %>
+	  <%= submit_tag("Search") %>
+	<% end %>
+</div>
+
+<div class="other">
+
+</div>
