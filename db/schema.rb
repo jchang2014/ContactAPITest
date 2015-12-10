@@ -20,19 +20,16 @@ ActiveRecord::Schema.define(version: 20151210064805) do
     t.string   "photo_url"
     t.string   "source"
     t.string   "tags"
-    t.integer  "user_id_id"
+    t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  add_index "profiles", ["user_id"], name: "index_profiles_on_user_id"
+
   create_table "users", force: :cascade do |t|
     t.integer  "concierge_id"
-    t.string   "name"
     t.string   "email"
-    t.string   "title"
-    t.string   "company"
-    t.string   "photo_url"
-    t.string   "source"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
   end
