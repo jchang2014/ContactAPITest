@@ -28,16 +28,43 @@ class UsersController < ApplicationController
 		if @fc_profile == nil
 			#Create fullcontact profile
 			@fullcontact_response = FullContact.person(email: params[:q])
+			
+			@fullcontact_response[:organizations]
 			@fc_profile = @user.profiles.create(name: @fullcontact_response[:contact_info][:full_name] || "n/a",
-																	 title: @fullcontact_response[:organizations][0][:title] || "n/a",
-																	 company: @fullcontact_response[:organizations][0][:name] || "n/a",
-																	 photo_url: @fullcontact_response[:photos][0][:url] || "n/a",
-																	 source: "fullcontact")
+																	 				source: "fullcontact")
 
-			#Create tags for fc profile
-			@tags = [] #FIX THIS
-			@fullcontact_response[:digital_footprint][:topics].each {|item| @tags << item[:value] } if !@fullcontact_response[:digital_footprint][:topics].empty?
-			@fc_profile.tags = @tags.join(', ')
+			#Add employment info if it exists
+			if @fullcontact_response[:organizations]
+			  @fc_profile.title = @fullcontact_response[:organizations][0][:title]
+			  @fc_profile.company = @fullcontact_response[:organizations][0][:name]
+			else
+				@fc_profile.title = "n/a"
+				@fc_profile.company = "n/a"
+			end
+
+			#Add photo_url if photos exist
+			if @fullcontact_response[:photos]
+			  @fc_profile.photo_url = @fullcontact_response[:photos][0][:url]
+			else
+				@fc_profile.photo_url = "n/a"
+			end
+
+			#Create tags for fc profile if they exist
+			if @fullcontact_response[:digital_footprint]
+				@topics = @fullcontact_response[:digital_footprint][:topics]
+				if @topics
+					if !@topics.empty?
+						@tags = []
+						@topics.each {|topic| @tags << topic[:value] } 
+						@fc_profile.tags = @tags.join(', ')
+					else
+						@fc_profile.tags = "n/a"
+					end
+				else
+					@fc_profile.tags = "n/a"
+				end
+			end
+			@fc_profile.save	
 		end
 	end
 end
