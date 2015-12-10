@@ -1,13 +1,23 @@
-<h1>Test App for Contact APIs</h1>
-
-<div class="searchbar">
-	<%= form_tag("/home/search", method: "get") do %>
-	  <%= label_tag(:q, "Search for:") %>
-	  <%= text_field_tag(:q) %>
-	  <%= submit_tag("Search") %>
-	<% end %>
+<div class="row">
+	<div class="col-md-12"><h1 class="text-center">Test App for Contact APIs</h1></div>
 </div>
 
-<div class="other">
+<div class="row">
+	<div class="col-md-12 form-group text-center">
+		<%= form_tag("/home/search", method: "get") do %>
+		  <%= label_tag(:q, "Get contact details for:") %>
+		  <%= text_field_tag 'q', placeholder="name@email.com" %>
+		  <%= submit_tag("Search") %>
+		<% end %>
+	</div>
+</div>
 
+<div class="row">
+	<p class="text-center"><strong>or</strong></p>
+</div>
+
+<div class="row">
+	<div class="col-md-12 text-center">
+		<a class="btn btn-default" href="/users" role="button">View all users</a>
+	</div>
 </div>
