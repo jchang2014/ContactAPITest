@@ -11,7 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151210062430) do
+ActiveRecord::Schema.define(version: 20151210064805) do
+
+  create_table "profiles", force: :cascade do |t|
+    t.string   "name"
+    t.string   "title"
+    t.string   "company"
+    t.string   "photo_url"
+    t.string   "source"
+    t.string   "tags"
+    t.integer  "user_id_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.integer  "concierge_id"
