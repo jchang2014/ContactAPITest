@@ -6,6 +6,7 @@ class CreateProfiles < ActiveRecord::Migration
     	t.string :company
     	t.string :photo_url
     	t.string :source
+    	t.string :tags
     	t.references :user_id
 
       t.timestamps null: false
