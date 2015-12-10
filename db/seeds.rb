@@ -60,12 +60,12 @@ users_array = [[1,"n3xeurope@gmail.com"],
 	end
 
 	def find_fc_employment_info
-	  @fc_profile.title = @fullcontact_response.try(:organizations).try(:as,0).try(:title) || "n/a"
-	  @fc_profile.company = @fullcontact_response.try(:organizations).try(:as,0).try(:name) || "n/a"
+	  @fc_profile.title = @fullcontact_response.try(:organizations).try(:as,0).try(:title) 
+	  @fc_profile.company = @fullcontact_response.try(:organizations).try(:as,0).try(:name) 
 	end
 
 	def find_fc_photo_info
-	  @fc_profile.photo_url = @fullcontact_response.try(:photos).try(:as,0).try(:url) || "n/a"
+	  @fc_profile.photo_url = @fullcontact_response.try(:photos).try(:as,0).try(:url) 
 	end
 
 	def find_fc_tag_info
