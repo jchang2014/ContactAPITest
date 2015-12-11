@@ -38,12 +38,12 @@ class UsersController < ApplicationController
 		rescue Nestful::ResourceInvalid
 			nil
 		end
-		@cb_profile = @user.profiles.create(name: @clearbit_response.try(:person).try(:name).try(:fullName) || "n/a",
-																 title: @clearbit_response.try(:person).try(:employment).try(:title) || "n/a",
-																 company: @clearbit_response.try(:person).try(:employment).try(:name) || "n/a",
-																 photo_url: @clearbit_response.try(:person).try(:avatar) || "n/a",
+		@cb_profile = @user.profiles.create(name: @clearbit_response.try(:person).try(:name).try(:fullName) || "none1",
+																 title: @clearbit_response.try(:person).try(:employment).try(:title) || "none2",
+																 company: @clearbit_response.try(:person).try(:employment).try(:name) || "none3",
+																 photo_url: @clearbit_response.try(:person).try(:avatar) || "none4",
 																 source: "Clearbit",
-																 tags: "n/a")
+																 tags: "none5")
 	end
 
 	def create_fc_profile
@@ -54,17 +54,18 @@ class UsersController < ApplicationController
 		rescue FullContact::Invalid
 			nil
 		end 
-		@fc_profile = @user.profiles.create(name: @fullcontact_response.try(:contact_info).try(:full_name) || "n/a",
+
+		@fc_profile = @user.profiles.create(name: @fullcontact_response.try(:contact_info).try(:full_name) || "none6",
 																 				source: "Fullcontact")
 	end
 
 	def find_fc_employment_info
-	  @fc_profile.title = @fullcontact_response.try(:organizations).try(:as,0).try(:title) || "n/a"
-	  @fc_profile.company = @fullcontact_response.try(:organizations).try(:as,0).try(:name) || "n/a"
+	  @fc_profile.title = @fullcontact_response.try(:organizations).try(:at,0).try(:title) || "none7"
+	  @fc_profile.company = @fullcontact_response.try(:organizations).try(:at,0).try(:name) || "none8"
 	end
 
 	def find_fc_photo_info
-	  @fc_profile.photo_url = @fullcontact_response.try(:photos).try(:as,0).try(:url) || "n/a"
+	  @fc_profile.photo_url = @fullcontact_response.try(:photos).try(:at,0).try(:url) || "none9"
 	end
 
 	def find_fc_tag_info
@@ -75,10 +76,10 @@ class UsersController < ApplicationController
 				@topics.each {|topic| @tags << topic[:value] } 
 				@fc_profile.tags = @tags.join(', ')
 			else
-				@fc_profile.tags = "n/a"
+				@fc_profile.tags = "none10"
 			end
 		else
-			@fc_profile.tags = "n/a"
+			@fc_profile.tags = "none11"
 		end
 	end
 end
