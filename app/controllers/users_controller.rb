@@ -41,7 +41,7 @@ class UsersController < ApplicationController
 		@cb_profile = @user.profiles.create(name: @clearbit_response.try(:person).try(:name).try(:fullName) || "n/a",
 																 title: @clearbit_response.try(:person).try(:employment).try(:title) || "n/a",
 																 company: @clearbit_response.try(:person).try(:employment).try(:name) || "n/a",
-																 photo_url: @clearbit_response.try(:person).try(:avatar) || "n/a",
+																 photo_url: @clearbit_response.try(:person).try(:avatar) || nil,
 																 source: "Clearbit",
 																 tags: "n/a")
 	end
@@ -65,7 +65,7 @@ class UsersController < ApplicationController
 	end
 
 	def find_fc_photo_info
-	  @fc_profile.photo_url = @fullcontact_response.try(:photos).try(:at,0).try(:url) || "n/a"
+	  @fc_profile.photo_url = @fullcontact_response.try(:photos).try(:at,0).try(:url) || nil
 	end
 
 	def find_fc_tag_info
