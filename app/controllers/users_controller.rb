@@ -16,8 +16,9 @@ class UsersController < ApplicationController
 		create_fc_profile if !@fc_profile
 	end
 
-	private
 
+	private
+	#Need to move these to a lib file
 	def create_cb_profile
 		#Query Clearbit for user data
 		@clearbit_response = begin
@@ -27,7 +28,7 @@ class UsersController < ApplicationController
 		end
 
 		#Save Clearbit response
-		@user.responses.create(response: @clearbit_response, source: "Clearbit")
+		@user.responses.create(response_hash: @clearbit_response.to_json, source: "Clearbit")
 
 		#Create profile from clearbit response
 		@cb_profile = @user.profiles.create(name: @clearbit_response.try(:person).try(:name).try(:fullName) || "n/a",
@@ -49,7 +50,7 @@ class UsersController < ApplicationController
 		end 
 
 		#Save Fullcontact response
-		@user.responses.create(response: @fullcontact_response, source: "Fullcontact")
+		@user.responses.create(response_hash: @fullcontact_response.to_json, source: "Fullcontact")
 
 		#Create profile from fullcontact response
 		@fc_profile = @user.profiles.create(name: @fullcontact_response.try(:contact_info).try(:full_name) || "n/a",
