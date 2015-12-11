@@ -17,3 +17,4 @@
 /tmp
 .env
 /db/seeds.rb
+/db/unapproved-sf-users.csv
