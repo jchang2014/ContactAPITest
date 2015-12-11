@@ -61,6 +61,7 @@ class UsersController < ApplicationController
 		find_fc_employment_info
 		find_fc_photo_info
 		find_fc_tag_info
+		find_linkedin_url
 		@fc_profile.save
 	end
 
@@ -85,6 +86,13 @@ class UsersController < ApplicationController
 			end
 		else
 			@fc_profile.tags = "n/a"
+		end
+	end
+
+	def find_linkedin_url
+		@social_profiles = @fullcontact_response.try(:social_profiles)
+		@social_profiles.each do |profile|
+			@fc_profile.linkedin_url = profile.try(:url) if profile.try(:type) == "linkedin"
 		end
 	end
 end
