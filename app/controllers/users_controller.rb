@@ -32,6 +32,7 @@ class UsersController < ApplicationController
 
 		#Create profile from clearbit response
 		@cb_profile = @user.profiles.create(name: @clearbit_response.try(:person).try(:name).try(:fullName) || "n/a",
+																 linkedin_url: @clearbit_response.try(:person).try(:linkedin).try(:handle) || nil,
 																 title: @clearbit_response.try(:person).try(:employment).try(:title) || "n/a",
 																 company: @clearbit_response.try(:person).try(:employment).try(:name) || "n/a",
 																 photo_url: @clearbit_response.try(:person).try(:avatar) || nil,
