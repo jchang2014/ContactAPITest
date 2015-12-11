@@ -6,7 +6,7 @@
 	<div class="col-md-12 form-group text-center">
 		<%= form_tag("/users/#{:id}", method: "get") do %>
 		  <%= label_tag(:q, "Get contact details for:") %>
-		  <%= text_field_tag 'q', placeholder="name@email.com" %>
+		  <%= text_field_tag 'q',nil, :placeholder => "name@email.com" %>
 		  <%= submit_tag("Search") %>
 		<% end %>
 	</div>
