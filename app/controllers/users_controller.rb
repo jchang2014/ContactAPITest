@@ -6,21 +6,14 @@ class UsersController < ApplicationController
 	def show
 		@user = User.find_by(email: params[:q])
 
-		if @user == nil 
-			@user = User.create(email: params[:q])
-		end
+		@user = User.create(email: params[:q]) if !@user
 
 		@cb_profile = @user.profiles.find_by(source:"Clearbit")
-
-		if !@cb_profile
-			create_cb_profile
-		end
+		create_cb_profile if !@cb_profile
 
 		@fc_profile = @user.profiles.find_by(source:"Fullcontact")
 
-		if !@fc_profile
-			create_fc_profile
-		end	
+		create_fc_profile if !@fc_profile
 	end
 
 	private
