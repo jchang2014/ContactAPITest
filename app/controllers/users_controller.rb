@@ -7,7 +7,6 @@ class UsersController < ApplicationController
 		@user = User.find_by(email: params[:q])
 
 		if @user == nil 
-			#Create new user
 			@user = User.create(email: params[:q])
 		end
 
@@ -20,24 +19,24 @@ class UsersController < ApplicationController
 		@fc_profile = @user.profiles.find_by(source:"Fullcontact")
 
 		if !@fc_profile
-			p "NOT FOUND"
 			create_fc_profile
-			find_fc_employment_info
-			find_fc_photo_info
-			find_fc_tag_info
-			
-			@fc_profile.save	
 		end	
 	end
 
 	private
 
 	def create_cb_profile
+		#Query Clearbit for user data
 		@clearbit_response = begin
 			Clearbit::Enrichment.find(email: @user.email, stream: true)
 		rescue Nestful::ResourceInvalid
 			nil
 		end
+
+		#Save Clearbit response
+		@user.responses.create(response: @clearbit_response, source: "Clearbit")
+
+		#Create profile from clearbit response
 		@cb_profile = @user.profiles.create(name: @clearbit_response.try(:person).try(:name).try(:fullName) || "n/a",
 																 title: @clearbit_response.try(:person).try(:employment).try(:title) || "n/a",
 																 company: @clearbit_response.try(:person).try(:employment).try(:name) || "n/a",
@@ -47,6 +46,7 @@ class UsersController < ApplicationController
 	end
 
 	def create_fc_profile
+		#Query Fullcontact for user data
 		@fullcontact_response = begin
 			FullContact.person(email: @user.email)
 		rescue FullContact::NotFound
@@ -55,8 +55,18 @@ class UsersController < ApplicationController
 			nil
 		end 
 
+		#Save Fullcontact response
+		@user.responses.create(response: @fullcontact_response, source: "Fullcontact")
+
+		#Create profile from fullcontact response
 		@fc_profile = @user.profiles.create(name: @fullcontact_response.try(:contact_info).try(:full_name) || "n/a",
 																 				source: "Fullcontact")
+
+		#Fill in other attributes
+		find_fc_employment_info
+		find_fc_photo_info
+		find_fc_tag_info
+		@fc_profile.save
 	end
 
 	def find_fc_employment_info
