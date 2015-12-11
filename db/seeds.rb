@@ -6,31 +6,31 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-users_array = [[1,"n3xeurope@gmail.com"],
-							 [2,"andrew@taplytics.com"],
-							 [3,"mcgseattle@yahoo.com"],
-							 [4,"andreajoseph@kw.com"],
-							 [5,"yalland@live.co.uk"],
-							 [6,"maor@pandats.com"],
-							 [7,"scott@makenapartners.com"],
-							 [8,"haji@bottega8.com"],
-							 [9,"ajma@live.com"],
-							 [10,"jeffrey.ouyang@gmail.com"],
-							 [11,"grace.coopman@pinpoint.jobs"],
-							 [12,"joenewbry@gmail.com"],
-							 [13,"thomson@framed.io"],
-							 [14,"urbanturbanguy@gmail.com"],
-							 [15,"jon@colab.la"],
-							 [16,"christopher.hoyd@gmail.com"],
-							 [17,"chanderson0@gmail.com"],
-							 [18,"dave@davefriedman.com"],
-							 [19,"next027@gmail.com"],
-							 [20,"jasmine@jbcomms.com"],
-							 [21,"todd.giannattasio@tresnicmedia.com"],
-							 [22,"itamar@outlook.com"],
-							 [23,"amg@freebee.pl"],
-							 [24,"fred@gredglick"],
-							 [25,"bradleygtucker@gmail.com"]
+users_array = ["n3xeurope@gmail.com",
+							 "andrew@taplytics.com",
+							 "mcgseattle@yahoo.com",
+							 "andreajoseph@kw.com",
+							 "yalland@live.co.uk",
+							 "maor@pandats.com",
+							 "scott@makenapartners.com",
+							 "haji@bottega8.com",
+							 "ajma@live.com",
+							 "jeffrey.ouyang@gmail.com",
+							 "grace.coopman@pinpoint.jobs",
+							 "joenewbry@gmail.com",
+							 "thomson@framed.io",
+							 "urbanturbanguy@gmail.com",
+							 "jon@colab.la",
+							 "christopher.hoyd@gmail.com",
+							 "chanderson0@gmail.com",
+							 "dave@davefriedman.com",
+							 "next027@gmail.com",
+							 "jasmine@jbcomms.com",
+							 "todd.giannattasio@tresnicmedia.com",
+							 "itamar@outlook.com",
+							 "amg@freebee.pl",
+							 "fred@gredglick",
+							 "bradleygtucker@gmail.com"
 							]
 
 	def create_cb_profile
@@ -39,12 +39,12 @@ users_array = [[1,"n3xeurope@gmail.com"],
 		rescue Nestful::ResourceInvalid
 			nil
 		end
-		@cb_profile = @user.profiles.create(name: @clearbit_response.try(:person).try(:name).try(:fullName) || "n/a",
-																 title: @clearbit_response.try(:person).try(:employment).try(:title) || "n/a",
-																 company: @clearbit_response.try(:person).try(:employment).try(:name) || "n/a",
-																 photo_url: @clearbit_response.try(:person).try(:avatar) || "n/a",
+		@cb_profile = @user.profiles.create(name: @clearbit_response.try(:person).try(:name).try(:fullName) || "no1",
+																 title: @clearbit_response.try(:person).try(:employment).try(:title) || "no2",
+																 company: @clearbit_response.try(:person).try(:employment).try(:name) || "no3",
+																 photo_url: @clearbit_response.try(:person).try(:avatar) || "no4",
 																 source: "Clearbit",
-																 tags: "n/a")
+																 tags: "no5")
 	end
 
 	def create_fc_profile
@@ -55,17 +55,23 @@ users_array = [[1,"n3xeurope@gmail.com"],
 		rescue FullContact::Invalid
 			nil
 		end 
-		@fc_profile = @user.profiles.create(name: @fullcontact_response.try(:contact_info).try(:full_name) || "n/a",
+
+		@fc_profile = @user.profiles.create(name: @fullcontact_response.try(:contact_info).try(:full_name) || "no6",
 																 				source: "Fullcontact")
+
+		find_fc_employment_info
+		find_fc_photo_info
+		find_fc_tag_info
+		@fc_profile.save
 	end
 
 	def find_fc_employment_info
-	  @fc_profile.title = @fullcontact_response.try(:organizations).try(:as,0).try(:title) 
-	  @fc_profile.company = @fullcontact_response.try(:organizations).try(:as,0).try(:name) 
+	  @fc_profile.title = @fullcontact_response.try(:organizations).try(:at,0).try(:title) || "no7"
+	  @fc_profile.company = @fullcontact_response.try(:organizations).try(:at,0).try(:name) || "no8"
 	end
 
 	def find_fc_photo_info
-	  @fc_profile.photo_url = @fullcontact_response.try(:photos).try(:as,0).try(:url) 
+	  @fc_profile.photo_url = @fullcontact_response.try(:photos).try(:at,0).try(:url) || "no9"
 	end
 
 	def find_fc_tag_info
@@ -76,19 +82,16 @@ users_array = [[1,"n3xeurope@gmail.com"],
 				@topics.each {|topic| @tags << topic[:value] } 
 				@fc_profile.tags = @tags.join(', ')
 			else
-				@fc_profile.tags = "n/a"
+				@fc_profile.tags = "no10"
 			end
 		else
-			@fc_profile.tags = "n/a"
+			@fc_profile.tags = "no11"
 		end
 	end
 
 
 users_array.each do |user|
-	@user = User.create(concierge_id: user[0], email: user[1])
+	@user = User.create(email: user)
 	create_cb_profile
 	create_fc_profile
-	find_fc_employment_info
-	find_fc_photo_info
-	find_fc_tag_info
 end
