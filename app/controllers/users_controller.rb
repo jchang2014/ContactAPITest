@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+	extend ClearbitHelpers
+
 	def index
 		@users = User.all
 	end
@@ -9,39 +11,17 @@ class UsersController < ApplicationController
 		@user = User.create(email: params[:q]) if !@user
 
 		@cb_profile = @user.profiles.find_by(source:"Clearbit")
-		create_cb_profile if !@cb_profile
+		create_cb_profile(@user) if !@cb_profile
 
-		@fc_profile = @user.profiles.find_by(source:"Fullcontact")
+		#@fc_profile = @user.profiles.find_by(source:"Fullcontact")
 
-		create_fc_profile if !@fc_profile
+		#create_fc_profile if !@fc_profile
 	end
 
 
 	private
 	#Need to move these to a lib file
-	def create_cb_profile
-		#Query Clearbit for user data
-		@clearbit_response = begin
-			Clearbit::Enrichment.find(email: @user.email, stream: true)
-		rescue Nestful::ResourceInvalid
-			nil
-		end
-
-		#Save Clearbit response
-		@user.responses.create(response_hash: @clearbit_response.to_json, source: "Clearbit")
-
-		#Create profile from clearbit response
-		@cb_profile = @user.profiles.create(name: @clearbit_response.try(:person).try(:name).try(:fullName) || "n/a",
-																 title: @clearbit_response.try(:person).try(:employment).try(:title) || "n/a",
-																 company: @clearbit_response.try(:person).try(:employment).try(:name) || "n/a",
-																 photo_url: @clearbit_response.try(:person).try(:avatar) || nil,
-																 source: "Clearbit",
-																 tags: "n/a")
-
-		#Fill in linkedin url attribute
-		@cb_profile.linkedin_url = find_cb_linkedin_url
-		@cb_profile.save
-	end
+	
 
 	def create_fc_profile
 		#Query Fullcontact for user data
@@ -99,16 +79,4 @@ class UsersController < ApplicationController
 		end
 	end
 
-	def find_cb_linkedin_url
-		@url = @clearbit_response.try(:person).try(:linkedin).try(:handle)
-
-		case @url
-		when ""
-			return nil
-		when nil
-			return nil
-		else 
-			return "https://linkedin.com/#{@url}"
-		end 
-	end
 end
