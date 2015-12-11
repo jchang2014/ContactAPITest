@@ -3,7 +3,7 @@
 	<td class="col-md-1"><%= profile.name %></td>
 	<td class="col-md-1">
 		<% if profile.linkedin_url %>
-			<%= link_to "View LinkedIn", "https://linkedin.com/#{profile.linkedin_url}", target: "_blank"%>
+			<%= link_to "View LinkedIn", profile.linkedin_url, target: "_blank"%>
 		<% else %>
 			<p>n/a</p>
 		<% end %>

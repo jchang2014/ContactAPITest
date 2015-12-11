@@ -32,12 +32,15 @@ class UsersController < ApplicationController
 
 		#Create profile from clearbit response
 		@cb_profile = @user.profiles.create(name: @clearbit_response.try(:person).try(:name).try(:fullName) || "n/a",
-																 linkedin_url: @clearbit_response.try(:person).try(:linkedin).try(:handle) || nil,
 																 title: @clearbit_response.try(:person).try(:employment).try(:title) || "n/a",
 																 company: @clearbit_response.try(:person).try(:employment).try(:name) || "n/a",
 																 photo_url: @clearbit_response.try(:person).try(:avatar) || nil,
 																 source: "Clearbit",
 																 tags: "n/a")
+
+		#Fill in linkedin url attribute
+		@cb_profile.linkedin_url = find_cb_linkedin_url
+		@cb_profile.save
 	end
 
 	def create_fc_profile
@@ -61,7 +64,7 @@ class UsersController < ApplicationController
 		find_fc_employment_info
 		find_fc_photo_info
 		find_fc_tag_info
-		find_linkedin_url
+		find_fc_linkedin_url
 		@fc_profile.save
 	end
 
@@ -89,10 +92,23 @@ class UsersController < ApplicationController
 		end
 	end
 
-	def find_linkedin_url
+	def find_fc_linkedin_url
 		@social_profiles = @fullcontact_response.try(:social_profiles)
 		@social_profiles.each do |profile|
 			@fc_profile.linkedin_url = profile.try(:url) if profile.try(:type) == "linkedin"
 		end
+	end
+
+	def find_cb_linkedin_url
+		@url = @clearbit_response.try(:person).try(:linkedin).try(:handle)
+
+		case @url
+		when ""
+			return nil
+		when nil
+			return nil
+		else 
+			return "https://linkedin.com/#{@url}"
+		end 
 	end
 end
