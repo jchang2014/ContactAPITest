@@ -1,4 +1,4 @@
-module
+module FullContactHelpers
 	def create_fc_profile(user)
 		#Query Fullcontact for user data
 		@fullcontact_response = begin
