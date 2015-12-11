@@ -1,4 +1,10 @@
 module FullContactHelpers
+
+	# attr_reader :user
+
+	# def initialize(user)
+	# 	@user = user
+	# end
 	def create_fc_profile(user)
 		#Query Fullcontact for user data
 		@fullcontact_response = begin
@@ -52,9 +58,12 @@ module FullContactHelpers
 
 	def find_fc_linkedin_url(response, profile)
 		@social_profiles = response.try(:social_profiles)
-		@social_profiles.each do |profile|
-			profile.linkedin_url = profile.try(:url) if profile.try(:type) == "linkedin"
-			profile.save
+		@social_profiles.each do |social_profile|
+			if social_profile.try(:type) == "linkedin"
+				profile.linkedin_url = social_profile.try(:url) 
+				profile.save
+			end
 		end
+		puts "final is:#{profile.linkedin_url}"
 	end
 end
