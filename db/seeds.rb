@@ -39,12 +39,12 @@ users_array = ["n3xeurope@gmail.com",
 		rescue Nestful::ResourceInvalid
 			nil
 		end
-		@cb_profile = @user.profiles.create(name: @clearbit_response.try(:person).try(:name).try(:fullName) || "no1",
-																 title: @clearbit_response.try(:person).try(:employment).try(:title) || "no2",
-																 company: @clearbit_response.try(:person).try(:employment).try(:name) || "no3",
-																 photo_url: @clearbit_response.try(:person).try(:avatar) || "no4",
+		@cb_profile = @user.profiles.create(name: @clearbit_response.try(:person).try(:name).try(:fullName) || "n/a",
+																 title: @clearbit_response.try(:person).try(:employment).try(:title) || "n/a",
+																 company: @clearbit_response.try(:person).try(:employment).try(:name) || "n/a",
+																 photo_url: @clearbit_response.try(:person).try(:avatar) || "n/a",
 																 source: "Clearbit",
-																 tags: "no5")
+																 tags: "n/a")
 	end
 
 	def create_fc_profile
@@ -56,7 +56,7 @@ users_array = ["n3xeurope@gmail.com",
 			nil
 		end 
 
-		@fc_profile = @user.profiles.create(name: @fullcontact_response.try(:contact_info).try(:full_name) || "no6",
+		@fc_profile = @user.profiles.create(name: @fullcontact_response.try(:contact_info).try(:full_name) || "n/a",
 																 				source: "Fullcontact")
 
 		find_fc_employment_info
@@ -66,12 +66,12 @@ users_array = ["n3xeurope@gmail.com",
 	end
 
 	def find_fc_employment_info
-	  @fc_profile.title = @fullcontact_response.try(:organizations).try(:at,0).try(:title) || "no7"
-	  @fc_profile.company = @fullcontact_response.try(:organizations).try(:at,0).try(:name) || "no8"
+	  @fc_profile.title = @fullcontact_response.try(:organizations).try(:at,0).try(:title) || "n/a"
+	  @fc_profile.company = @fullcontact_response.try(:organizations).try(:at,0).try(:name) || "n/a"
 	end
 
 	def find_fc_photo_info
-	  @fc_profile.photo_url = @fullcontact_response.try(:photos).try(:at,0).try(:url) || "no9"
+	  @fc_profile.photo_url = @fullcontact_response.try(:photos).try(:at,0).try(:url) || nil
 	end
 
 	def find_fc_tag_info
@@ -82,10 +82,10 @@ users_array = ["n3xeurope@gmail.com",
 				@topics.each {|topic| @tags << topic[:value] } 
 				@fc_profile.tags = @tags.join(', ')
 			else
-				@fc_profile.tags = "no10"
+				@fc_profile.tags = "n/a"
 			end
 		else
-			@fc_profile.tags = "no11"
+			@fc_profile.tags = "n/a"
 		end
 	end
 
