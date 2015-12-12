@@ -1,6 +1,4 @@
 class UsersController < ApplicationController
-	include ClearbitHelpers
-
 	def index
 		@users = User.all
 	end
@@ -10,8 +8,11 @@ class UsersController < ApplicationController
 
 		@user = User.create(email: params[:q]) if !@user
 
-		#@cb_profile = @user.profiles.find_by(source:"Clearbit")
-		#create_cb_profile(@user) if !@cb_profile
+		@cb_profile = @user.profiles.find_by(source:"Clearbit")
+		if !@cb_profile
+			@cb_profile = ClearbitHelpers.new(@user)
+			@cb_profile.create_cb_profile
+		end
 
 		@fc_profile = @user.profiles.find_by(source:"Fullcontact")
 		if !@fc_profile
