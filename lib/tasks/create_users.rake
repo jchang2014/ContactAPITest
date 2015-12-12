@@ -4,7 +4,7 @@ namespace :users do
 
 	task :create_users => :environment do 
 		#Save CSV data to array
-		user_array = CSV.read("/db/unapproved-sf-users.csv")
+		user_array = CSV.read("./db/unapproved-sf-users.csv")
 		#Remove headers row
 		user_array.shift
 		user_array.each do |user_row|
@@ -19,6 +19,10 @@ namespace :users do
 		#3. Create profile from response data
 		#Input: User email
 		#Output: Profile saved to DB
+		users = User.limit(100)
+		users.each do |user|
+			
+		end
 	end
 
 	task :create_clearbit_profiles do
