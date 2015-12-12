@@ -1,10 +1,15 @@
+require 'csv'
+
 namespace :users do 
-	task :create_users do 
-		#1.Open csv file
-		#2.Read each line for email, create user with just the email param
-		#3.Close csv file
-		#Input: CSV file
-		#Output: Users seeded to DB
+
+	task :create_users => :environment do 
+		#Save CSV data to array
+		user_array = CSV.read("/db/unapproved-sf-users.csv")
+		#Remove headers row
+		user_array.shift
+		user_array.each do |user_row|
+			User.create(email: user_row[3])
+		end
 	end
 
 	task :create_fullcontact_profiles do 
@@ -17,6 +22,15 @@ namespace :users do
 	end
 
 	task :create_clearbit_profiles do
+		keys = []
+
+		rows.each_slice(3) do |chunk|
+
+			chunk.each_with_index do |row, i|
+				key = keys[i]
+				FulllContactHelpers.new(row, key)
+			end
+		end
 		#For up to 50 users in database (Need to do this 3 times with 3 keys to hit 150)
 		#1. Query CB with user email
 		#2 Save response to response table
