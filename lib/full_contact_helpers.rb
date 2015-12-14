@@ -25,7 +25,7 @@ class FullContactHelpers
 		#Create profile from fullcontact response
 		@fc_profile = @user.profiles.create(name: @fullcontact_response.try(:contact_info).try(:full_name) || "n/a",
 																 				source: "Fullcontact",
-																 				status: @fullcontact_response.status)
+																 				status: @fullcontact_response.try(:status))
 
 		#Fill in other attributes
 		find_fc_employment_info
