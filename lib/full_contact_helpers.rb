@@ -15,6 +15,7 @@ class FullContactHelpers
 		rescue FullContact::Invalid
 			nil
 		rescue FullContact::Accepted
+			#ERROR: Uninitialize constant FullContact::Accepted
 			#Write worker to try again later
 			nil
 		end 
