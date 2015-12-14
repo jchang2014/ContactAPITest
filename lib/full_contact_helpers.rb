@@ -60,10 +60,11 @@ class FullContactHelpers
 
 	def find_fc_linkedin_url
 		@social_profiles = @fullcontact_response.try(:social_profiles)
-		@social_profiles.each do |social_profile|
-			if social_profile.try(:type) == "linkedin"
-				@fc_profile.linkedin_url = social_profile.try(:url) 
-			end
+		if @social_profiles
+			@social_profiles.each do |social_profile|
+				if social_profile.try(:type) == "linkedin"
+					@fc_profile.linkedin_url = social_profile.try(:url) 
+				end
 		end
 	end
 end
