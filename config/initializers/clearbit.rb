@@ -1,3 +1,3 @@
 require 'clearbit'
 
-Clearbit.key = ENV['CB_KEY']
+Clearbit.key = ENV['CB_KEY2']
