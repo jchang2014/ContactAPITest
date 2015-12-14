@@ -14,6 +14,9 @@ class FullContactHelpers
 			nil
 		rescue FullContact::Invalid
 			nil
+		rescue FullContact::Accepted
+			#Write worker to try again later
+			nil
 		end 
 
 		#Save Fullcontact response
@@ -65,6 +68,7 @@ class FullContactHelpers
 				if social_profile.try(:type) == "linkedin"
 					@fc_profile.linkedin_url = social_profile.try(:url) 
 				end
+			end
 		end
 	end
 end
