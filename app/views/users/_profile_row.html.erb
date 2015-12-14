@@ -1,14 +1,14 @@
 <tr>
-	<td class="col-md-1"><%= profile.source%></td>
-	<td class="col-md-1"><%= profile.name %></td>
-	<td class="col-md-1">
+	<td class="col-xs-1"><%= profile.source%></td>
+	<td class="col-xs-1"><%= profile.name %></td>
+	<td class="col-xs-1">
 		<% if profile.linkedin_url %>
 			<%= link_to "View LinkedIn", profile.linkedin_url, target: "_blank"%>
 		<% else %>
 			<p>n/a</p>
 		<% end %>
 	</td>
-	<td class="col-md-1">
+	<td class="col-xs-3">
 		<% if profile.photo_url %>
 			<img style="height: 100px" src=<%= profile.photo_url%>>
 		<% else %>
@@ -16,7 +16,13 @@
 		<% end %>
 	</td>
 
-	<td class="col-md-2"><%= profile.company %></td>
-	<td class="cold-md-2"><%= profile.title %></td>
-	<td class="col-md-3"><%= profile.tags %></td>
+	<td class="col-xs-2">
+		<% if profile.company.length == 0 %>
+			<p>n/a</p>
+		<% else %>
+			<%= profile.company %>
+		<% end %>
+	</td>
+	<td class="col-xs-2"><%= profile.title %></td>
+	<td class="col-xs-2"><%= profile.tags %></td>
 </tr>
