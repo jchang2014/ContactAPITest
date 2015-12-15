@@ -4,9 +4,9 @@
 
 <div class="row">
 	<div class="col-md-12 form-group text-center">
-		<%= form_tag("/prospector", method: "get") do %>
+		<%= form_tag("/prospector/show", method: "get") do %>
 		  <%= label_tag(:q, "Search ") %>
-		  <%= text_field_tag 'company', nil, :placeholder => "company" %>
+		  <%= text_field_tag 'company', nil, :placeholder => "company.com" %>
 		  <%= label_tag(:q, "for: ") %>
 		  <%= text_field_tag 'title', nil, :placeholder => "title" %>
 		  <%= submit_tag("Search") %>
