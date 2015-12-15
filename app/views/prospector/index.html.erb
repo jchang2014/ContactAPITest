@@ -1,0 +1,15 @@
+<div class="row">
+	<div class="col-md-12"><h1 class="text-center">Test App for Prospector</h1></div>
+</div>
+
+<div class="row">
+	<div class="col-md-12 form-group text-center">
+		<%= form_tag("/prospector", method: "get") do %>
+		  <%= label_tag(:q, "Search ") %>
+		  <%= text_field_tag 'company', nil, :placeholder => "company" %>
+		  <%= label_tag(:q, "for: ") %>
+		  <%= text_field_tag 'title', nil, :placeholder => "title" %>
+		  <%= submit_tag("Search") %>
+		<% end %>
+	</div>
+</div>
