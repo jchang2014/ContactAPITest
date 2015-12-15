@@ -20,7 +20,9 @@
 			<tbody>
 				<% @users.each do |user| %>
 					<% user.profiles.each do |profile| %>
-						<%= render partial: 'profile_row', locals: {profile: profile} %>
+						<% if profile.source != "Prospector" %>
+							<%= render partial: 'profile_row', locals: {profile: profile} %>
+						<% end %>
 					<% end %>
 				<% end %>
 			</tbody>
