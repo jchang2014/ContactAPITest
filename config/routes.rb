@@ -4,6 +4,6 @@ Rails.application.routes.draw do
 
   resource :home
   resources :users
-
+  resources :prospector
   
 end
