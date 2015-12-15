@@ -14,7 +14,7 @@ namespace :users do
 
 	task :create_fullcontact_profiles => :environment do 
 		#offset = ENV["OFFSET"]
-		#users = User.limit(14).offset(68)
+		users = User.limit(100).offset(100)
 		users.each do |user|
 			@fc_profile = FullContactHelpers.new(user)
 			@fc_profile.create_fc_profile
@@ -22,7 +22,7 @@ namespace :users do
 	end
 
 	task :create_clearbit_profiles => :environment do
-		#users = User.limit(31).offset(69)
+		users = User.limit(100).offset(100)
 		users.each do |user|
 			@cb_profile = ClearbitHelpers.new(user)
 			@cb_profile.create_cb_profile
