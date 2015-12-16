@@ -4,7 +4,9 @@ class ProspectorController < ApplicationController
 	end
 
 	def show
-		@people = Clearbit::Prospector.search(domain: params[:company],title: params[:title], email:true)
+		@people = Clearbit::Prospector.search(domain: params[:company],
+																					title: params[:title], 
+																					email:true, limit: 20)
 
 		ProspectorResponse.create(response_hash: @people.to_json)
 
