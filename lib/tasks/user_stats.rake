@@ -8,7 +8,7 @@ namespace :users do
 			@user_profiles = user.profiles
 			counter +=1 if @user_profiles[0].name == "n/a" && @user_profiles[1].name == "n/a"
 		end
-		puts "Name failures = #{counter}, successes = #{500 - counter}."
+		puts "Name failures = #{counter}"
 	end
 
 	task :linkedin_failures => :environment do
@@ -19,7 +19,7 @@ namespace :users do
 			@user_profiles = user.profiles
 			counter +=1 if @user_profiles[0].linkedin_url == nil && @user_profiles[1].linkedin_url == nil
 		end
-		puts "Name failures = #{counter}, successes = #{500 - counter}."
+		puts "Name failures = #{counter}"
 	end
 
 	task :photo_url_failures => :environment do
@@ -30,7 +30,7 @@ namespace :users do
 			@user_profiles = user.profiles
 			counter += 1 if @user_profiles[0].photo_url == nil && @user_profiles[1].photo_url == nil
 		end
-		puts "Photo failures = #{counter}, successes = #{500 - counter}."
+		puts "Photo failures = #{counter}"
 	end
 
 	task :company_failures => :environment do
@@ -41,7 +41,7 @@ namespace :users do
 			@user_profiles = user.profiles
 			counter += 1 if @user_profiles[0].company == "n/a" && @user_profiles[1].company == "n/a"
 		end
-		puts "Company failures = #{counter}, successes = #{500 - counter}."
+		puts "Company failures = #{counter}"
 	end
 
 	task :title_failures => :environment do
@@ -52,7 +52,7 @@ namespace :users do
 			@user_profiles = user.profiles
 			counter += 1 if @user_profiles[0].title == "n/a" && @user_profiles[1].title == "n/a"
 		end
-		puts "Title failures = #{counter}, successes = #{500 - counter}."
+		puts "Title failures = #{counter}"
 	end
 
 	task :tag_failures => :environment do
@@ -96,6 +96,6 @@ namespace :users do
 		@tags = 500 - Profile.where(source:"Fullcontact", tags: "n/a").count
 
 		puts "Fullcontact success: "
-		puts "Name: #{@name}, Linkedin: #{@linkedin}, Image: #{@image}, Company: #{@company}, Title: #{@title}."
+		puts "Name: #{@name}, Linkedin: #{@linkedin}, Image: #{@image}, Company: #{@company}, Title: #{@title}, Tags: #{@tags}."
 	end
 end
