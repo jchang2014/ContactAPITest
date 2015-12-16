@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151215014515) do
+ActiveRecord::Schema.define(version: 20151216004233) do
 
   create_table "profiles", force: :cascade do |t|
     t.string   "name"
@@ -28,6 +28,21 @@ ActiveRecord::Schema.define(version: 20151215014515) do
   end
 
   add_index "profiles", ["user_id"], name: "index_profiles_on_user_id"
+
+  create_table "prospector_profiles", force: :cascade do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "full_name"
+    t.string   "title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "prospector_responses", force: :cascade do |t|
+    t.text     "response_hash"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "responses", force: :cascade do |t|
     t.text     "response_hash"
