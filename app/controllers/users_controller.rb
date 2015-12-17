@@ -1,6 +1,15 @@
+require 'csv'
+
 class UsersController < ApplicationController
 	def index
-		@users = User.all
+		@users = []
+		csv_array = CSV.read("./db/uber-users.csv")
+		csv_array.shift
+		csv_array.each do |user_row|
+			user = User.find_by(email: user_row[3])
+			@users.push(user)
+		end
+		@users
 	end
 
 	def show
