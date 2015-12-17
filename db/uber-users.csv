@@ -1,0 +1,52 @@
+"id","first_name","last_name","email","title","company","profile_url","created_at","approved","active"
+201,"Dmitry","Shevelenko","dshevel@gmail.com","Product Partnerships","Uber","https://www.linkedin.com/in/dmitryshevelenko","2015-04-22 06:13:39",1,1
+792,"Kat","Huang","kkathuang@gmail.com","Software Engineer","Uber","https://www.linkedin.com/in/kathuang1","2015-04-22 06:13:40",1,1
+17523,"Andrew","Chen","voodoo@gmail.com","Supply Growth","Uber","https://www.linkedin.com/in/andrewchen","2015-07-16 00:29:18",1,1
+17761,"John Mark","Nickels","jm@jmnickels.com","Senior Product Manager, Marketplace Efficiency","Uber","https://www.linkedin.com/pub/john-mark-nickels/3/92/256","2015-08-06 18:54:23",1,1
+17954,"Anant","Gupta","anant914@gmail.com","Head of Supply Engineering","Uber","https://www.linkedin.com/in/anantgupta1","2015-08-13 02:16:15",1,1
+17997,"Aditya","Sarawgi","aditya@uber.com","Data Scientist/Engineer","Uber","https://www.linkedin.com/in/adityasarawgi","2015-08-14 05:58:22",1,0
+18083,"Phil","Rabin","phil@uber.com","Android Engineer","Uber","https://www.linkedin.com/in/philrabin","2015-08-18 01:11:46",1,0
+18156,"Kurt","Spindler","kespindler@gmail.com","Software Engineer","Uber","https://www.linkedin.com/pub/kurt-spindler/59/48/7b2","2015-08-19 22:24:43",1,0
+18169,"Padmini","Pyapali","padmini@uber.com","Senior Software Engineer","Uber","https://www.linkedin.com/in/ppyapali","2015-08-20 00:36:32",1,1
+18196,"Shalin","Amin","shalin@gmail.com","Director, Design, Product & Brand Experience","Uber","https://www.linkedin.com/in/shalin","2015-08-20 22:43:22",1,1
+18224,"Eskil","Olsen","eskil@eskil.org","Engineering Manager","Uber","https://www.linkedin.com/in/eskil","2015-08-22 19:51:21",1,1
+18295,"Alex","Priest","alex@uber.com","Digital Brand & Content Lead","Uber","http://linkedin.com/in/alexpriest","2015-08-24 23:29:47",1,1
+18331,"Aleksey","Smolenchuk","lxe@lxe.co","Software Engineer","Uber","https://www.linkedin.com/in/alekseysmolenchuk","2015-08-25 23:28:43",1,1
+18438,"Hannah","Shapiro","hannah@uber.com","Recruiter","Uber","https://www.linkedin.com/in/hannaheshapiro","2015-08-27 06:14:49",1,1
+18451,"Samantha","Migdal","samantha@uber.com","Product Operations Specialist","Uber","https://www.linkedin.com/in/samanthamigdal","2015-08-27 15:47:05",1,1
+18465,"Faiz","Abbasi","faiz.s.abbasi@gmail.com","Software Engineer","Uber","https://www.linkedin.com/pub/faiz-abbasi/3a/8a/2a9","2015-08-27 19:00:58",1,1
+18857,"Bastien","Beurier","bastienbeurier@gmail.com","Software Engineer","Uber","https://www.linkedin.com/pub/bastien-beurier/15/313/87b","2015-09-06 19:01:19",1,1
+18996,"Gideon","Hod","gideon@uber.com","Product Operations Specialist - Beehive Program ","Uber","https://www.linkedin.com/in/gideonhod","2015-09-10 08:04:55",1,1
+19073,"Randy M","Berridge","r.berridge11@gmail.com","Senior Business Operations Analyst ","Uber","https://www.linkedin.com/in/rberridge","2015-09-11 21:59:52",1,1
+19142,"Molly","DeShazo","molly@uber.com","Special Events ","Uber","https://www.linkedin.com/in/workformemollyd","2015-09-14 03:18:46",1,0
+19212,"Marlena","Sampson","sampsonmarlena@gmail.com","Community Operations Manager ","Uber","https://www.linkedin.com/in/marlenarenae","2015-09-15 00:55:12",1,1
+19237,"Max","Crowley","max@uber.com","Uber for Business Lead","Uber","https://www.linkedin.com/in/maxjc","2015-09-15 06:28:08",1,1
+19260,"Jeremy","Lermitte","j@uber.com","Growth Team ","Uber","https://www.linkedin.com/pub/jeremy-lermitte/2a/3b7/915","2015-09-15 20:23:28",1,1
+19406,"Frank","Chang","frank@uber.com","Analytics ","Uber","https://www.linkedin.com/in/frankchang","2015-09-17 20:50:14",1,1
+19407,"Brad","Rosenthal","bradrrosenthal@gmail.com","Partnerships, Insurance ","Uber","https://www.linkedin.com/in/bradrrosenthal","2015-09-17 20:52:54",1,1
+19470,"Mark","Huggins","mark@hugginz.com","Technical Project Manager ","Uber","https://www.linkedin.com/in/hugginz","2015-09-20 03:16:59",1,1
+19523,"Dima","Kovalev","dima@uber.com","Product Operations Lead (Core Experience) ","Uber","https://www.linkedin.com/in/dimakovalev","2015-09-20 21:57:32",1,1
+19559,"Haziq Azizi","Ahmad Zakir","haziq@uber.com","Operations Intern","Uber","http://www.linkedin.com/in/haziqazizi","2015-09-21 14:49:17",NULL,1
+19661,"Natasha","Weaser","natasha.weaser@gmail.com","Operations Associate ","Uber","https://www.linkedin.com/in/natashaweaser","2015-09-22 17:33:23",1,1
+19687,"Spencer","Fang","spencerfang@gmail.com","Engineer ","Uber","https://www.linkedin.com/in/spencerfang","2015-09-22 18:40:40",1,1
+19762,"Selene","Hakobyan","selenchik88@gmail.com","Corporate Paralegal ","Uber","https://www.linkedin.com/pub/selene-hakobyan/27/b32/6b9","2015-09-23 19:16:47",1,1
+19776,"Erin","Yaylali","erinyaylali@gmail.com","Software Engineer","Uber","https://www.linkedin.com/in/erinyaylali","2015-09-23 22:46:04",1,1
+19787,"Genevieve","Smyth","genna@uber.com","PRO, Learning & Development Lead ","Uber","https://www.linkedin.com/in/genevievegerngross","2015-09-24 03:19:15",1,1
+19795,"Kassandra","Martinez","kassandra@uber.com","Regional Community Operations Manager ","Uber","https://www.linkedin.com/in/kassandramartinez","2015-09-24 15:08:38",1,1
+19819,"Adria","Hou","adria.hou@gmail.com","Business Development ","Uber","https://www.linkedin.com/in/adriahou","2015-09-24 22:10:39",1,1
+19831,"Natasha","Osborne","natasha@uber.com","Strategy & Planning, EMEA ","Uber","https://www.linkedin.com/in/nlosborne","2015-09-25 00:36:57",1,1
+19848,"Vicki","Link","vicki@uber.com","Construction and Facilities Commodity Manager ","Uber","https://www.linkedin.com/pub/vicki-cocchiarella-link/0/a85/11b","2015-09-25 20:47:47",NULL,1
+20045,"Elliott","Meyer","elliottdmeyer@gmail.com","Workplace Manager ","Uber","https://www.linkedin.com/in/elliottmeyer","2015-09-29 23:26:33",1,1
+20089,"Diana","Li","diana@uber.com","Regional Tools and Policy, China ","Uber","https://www.linkedin.com/pub/diana-li/16/728/578","2015-09-30 21:07:44",1,1
+20135,"Kristy","Bates","kristy@uber.com","Marketing Manager","Uber","https://www.linkedin.com/pub/kristy-bates/23/83/450","2015-10-02 16:01:02",NULL,1
+20143,"Conor","Myhrvold","conor.myhrvold@gmail.com","Program Manager | Senior Technical Writer","Uber","https://www.linkedin.com/in/ubereng","2015-10-02 18:11:53",1,1
+20187,"Denali","Lumma","denalilumma@gmail.com","Senior Engineering Manager","Uber","https://www.linkedin.com/pub/denali-lumma/1/6/133","2015-10-04 12:49:29",1,1
+20316,"leslie","williams","lesliewilliams38@gmail.com","Digital Content Manager ","Uber","https://www.linkedin.com/pub/leslie-williams/b/713/166","2015-10-07 18:34:39",1,1
+21685,"Marlon","Gallardo","marlon@uber.com","Expansion Lead ","Uber","https://www.linkedin.com/in/marlon-gallardo-b540016","2015-11-17 16:20:00",1,1
+21878,"Thomas","Chen","tomkit@gmail.com","Engineering","Uber","https://www.linkedin.com/in/thomaschen","2015-11-20 19:52:17",1,1
+21901,"Baoguang","Zhai","zealzouzhai@gmail.com","China Growth ","Uber","https://www.linkedin.com/in/bgzhai","2015-11-21 03:30:51",1,1
+21930,"Brandie","Baker","brandie@uber.com","Executive Assistant ","Uber","https://www.linkedin.com/in/brandie-baker-7851741a","2015-11-22 19:06:50",NULL,1
+22182,"Chunyan","Song","chunyan@gmail.com","Software Engineer, Growth Platform","Uber","https://www.linkedin.com/in/chunyansong","2015-11-29 22:25:00",1,1
+22445,"Xiao","Guo","xiao@uber.com","Mobile Engineer ","Uber","https://www.linkedin.com/in/xiao-guo-353a4118","2015-12-08 07:03:23",1,1
+22638,"Matyas","Tamas","matyastamas@gmail.com","Data Science Manager ","Uber","https://www.linkedin.com/in/matyastamas","2015-12-10 18:33:40",1,1
+22726,"Sabrina","Ross","sabrina.ross@gmail.com","Corporate Counsel ","Uber","https://www.linkedin.com/in/sabrinaross","2015-12-11 21:12:18",1,1
